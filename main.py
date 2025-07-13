@@ -1,4 +1,4 @@
-# main.py
+
 
 from telegram.ext import Updater, CommandHandler
 import os
@@ -8,10 +8,8 @@ def start(update, context):
     update.message.reply_text("✅ Hello! MEV bot is alive.")
 
 def main():
-    # Start keep_alive server
     keep_alive()
 
-    # Get token from environment
     TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
     if not TOKEN:
         print("❌ TELEGRAM_BOT_TOKEN not set")
@@ -20,10 +18,8 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    # Add command handlers
     dp.add_handler(CommandHandler("start", start))
 
-    # Start polling and keep the bot running
     print("🚀 Bot started...")
     updater.start_polling()
     updater.idle()
@@ -33,4 +29,3 @@ if __name__ == '__main__':
         main()
     except Exception as e:
         print(f"🔥 ERROR: {e}")
-
